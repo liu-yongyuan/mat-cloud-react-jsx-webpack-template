@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const env = require('./env');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
@@ -123,11 +122,6 @@ css、媒体、图片资源:一般都是单独存在的,可以采用contenthash,
     new webpack.DefinePlugin({
       'process.env.BASE_ENV': JSON.stringify(process.env.BASE_ENV),
     }),
-
-    /* 在不需要刷新浏览器的前提下模块热更新,并且能够保留react组件的状态
-      1,css 和 less 
-    */
-    new ReactRefreshPlugin(), // 添加热更新文件
   ],
 
   // webpack 5 缓存
