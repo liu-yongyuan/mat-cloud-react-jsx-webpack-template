@@ -6,7 +6,6 @@ import {
     SmileFilled,
     TabletFilled,
 } from '@ant-design/icons';
-
 export default {
     route: {
         path: '/',
@@ -15,7 +14,6 @@ export default {
                 path: '/welcome',
                 name: '欢迎',
                 icon: <SmileFilled />,
-                component: './Welcome',
             },
             {
                 path: '/admin',
