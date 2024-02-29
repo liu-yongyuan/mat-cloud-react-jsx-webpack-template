@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import './app.less';
 import { Link, Outlet } from 'react-router-dom';
-import { setREM } from '@/libs/rem'
+import { setREM } from '@/libs/rem';
 const App = () => {
     useEffect(() => {
         setREM();
@@ -9,7 +9,8 @@ const App = () => {
         window.onresize = () => {
             setREM();
         }
-    })
+        return () => { };
+    }, []);
     return (
         <div className='mat-page-wrapper'>
             <div className='mat-page-container'>
