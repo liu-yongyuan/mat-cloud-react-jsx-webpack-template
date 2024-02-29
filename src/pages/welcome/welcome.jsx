@@ -5,6 +5,8 @@ const Welcome = () => {
     return (
         <Card>
             Hello World!
+            <br />
+            base_env: {process.env.BASE_ENV}
         </Card>
     );
 }

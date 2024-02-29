@@ -1,79 +1,49 @@
-import React, { useState } from 'react';
-import { PageContainer, ProCard, ProLayout, WaterMark } from '@ant-design/pro-components';
-import {
-    GithubFilled,
-    InfoCircleFilled,
-    QuestionCircleFilled,
-} from '@ant-design/icons';
-import defaultProps from './_defaultProps';
-
+import React, { Suspense, useEffect, useState } from 'react';
 import './app.less';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
+import { setREM } from '@/libs/rem'
 const App = () => {
-    const [pathname, setPathname] = useState('/list/sub-page/sub-sub-page1');
+    useEffect(() => {
+        setREM();
+        // 监听屏幕分辨率，设置根字体大小
+        window.onresize = () => {
+            setREM();
+        }
+    })
     return (
-        <WaterMark content="">
-            <ProLayout
-                siderWidth={216}
-                bgLayoutImgList={[
-                    {
-                        src: 'https://img.alicdn.com/imgextra/i2/O1CN01O4etvp1DvpFLKfuWq_!!6000000000279-2-tps-609-606.png',
-                        left: 85,
-                        bottom: 100,
-                        height: '303px',
-                    },
-                    {
-                        src: 'https://img.alicdn.com/imgextra/i2/O1CN01O4etvp1DvpFLKfuWq_!!6000000000279-2-tps-609-606.png',
-                        bottom: -68,
-                        right: -45,
-                        height: '303px',
-                    },
-                    {
-                        src: 'https://img.alicdn.com/imgextra/i3/O1CN018NxReL1shX85Yz6Cx_!!6000000005798-2-tps-884-496.png',
-                        bottom: 0,
-                        left: 0,
-                        width: '331px',
-                    },
-                ]}
-                {...defaultProps}
-                location={{
-                    pathname,
-                }}
-                avatarProps={{
-                    src: 'https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg',
-                    title: 'Yongy',
-                    size: 'large',
-                }}
-                actionsRender={(props) => {
-                    if (props.isMobile) return [];
-                    return [
-                        <InfoCircleFilled key="InfoCircleFilled" />,
-                        <QuestionCircleFilled key="QuestionCircleFilled" />,
-                        <GithubFilled key="GithubFilled" />,
-                    ];
-                }}
-                menuItemRender={(item, dom) => (
-                    <div
-                        onClick={() => {
-                            setPathname(item.path || '/welcome');
-                        }}
-                    >
-                        {dom}
-                    </div>
-                )}
-            >
-                <PageContainer>
-                    <ProCard
-                        style={{
-                            height: '100vh',
-                            minHeight: 800,
-                        }}
-                    >
-                        <Outlet />
-                    </ProCard>
-                </PageContainer>
-            </ProLayout>
-        </WaterMark>
+        <div className='mat-page-wrapper'>
+            <div className='mat-page-container'>
+                <header className='mat-page-header'>
+                    <h1>Header</h1>
+                </header>
+                <nav className='mat-page-nav'>
+                    <ul>
+                        <li>
+                            <Link to="/">Home</Link>
+                        </li>
+                        <li>
+                            <Link to="/welcome">welcome</Link>
+                        </li>
+                        <li>
+                            <Link to="/project">Projects</Link>
+                        </li>
+                        <li>
+                            <Link to="/contact">Contact</Link>
+                        </li>
+                    </ul>
+                    <form action='/home' method='get'>
+                        <input type='search' name='q' placeholder='Search query' />
+                        <input type='submit' value='Go' />
+                    </form>
+                </nav>
+                <Suspense>
+                    <Outlet />
+                </Suspense>
+                <footer className='mat-page-footer'>
+                    <p>&copy;Copyright 2050 by liuyongyuan. All rights reversed.</p>
+                </footer>
+            </div>
+        </div>
     );
 }
 

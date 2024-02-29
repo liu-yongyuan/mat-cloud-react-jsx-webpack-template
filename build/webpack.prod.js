@@ -31,9 +31,10 @@ module.exports = merge(baseConfig, {
     // 清理无用 css
     // 检测 src 下所有 jsx 和 public 下的 index.html 中使用的类名,id 和标签名称
     // 只打包这些文件中用到的样式
-    new PurgeCSSPlugin({
-      paths: globAll.sync([`${path.join(__dirname, '../src')}/**/*.jsx`, path.join(__dirname, '../public/index.html')]),
-    }),
+    // 不清处，因为会改UI组件的样式，清除了之后影响UI组件的样式不会被加载
+    // new PurgeCSSPlugin({
+    //   paths: globAll.sync([`${path.join(__dirname, '../src')}/**/*.jsx`, path.join(__dirname, '../public/index.html')]),
+    // }),
 
     // 前端代码在浏览器运行,需要从服务器把html,css,js资源下载执行,下载的资源体积越小,页面加载速度就会越快。
     // 生成 gzip 插件,提供加速加载能力
