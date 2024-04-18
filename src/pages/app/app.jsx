@@ -11,6 +11,9 @@ const App = () => {
         }
         return () => { };
     }, []);
+    setTimeout(() => {
+        throw new Error('asdfasd')
+    }, 2000)
     return (
         <div className='mat-page-wrapper'>
             <div className='mat-page-container'>
