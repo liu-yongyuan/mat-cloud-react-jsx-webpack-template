@@ -23,8 +23,11 @@ module.exports = merge(baseConfig, {
     },
   },
 
-  plugins: [new ReactRefreshPlugin({
-    // 不显示错误选项
-    overlay: false
-  })],
+  plugins: [
+    // https://github.com/pmmmwh/react-refresh-webpack-plugin/blob/HEAD/docs/API.md
+    new ReactRefreshPlugin({
+      // 不显示错误选项. 
+      overlay: false,
+    }),
+  ],
 });
